@@ -1,0 +1,19 @@
+{
+  "name": "FarApp-Backend",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jeonyunjae/FarApp_Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jeonyunjae/FarApp_Backend/issues"
+  },
+  "homepage": "https://github.com/Jeonyunjae/FarApp_Backend#readme"
+}
