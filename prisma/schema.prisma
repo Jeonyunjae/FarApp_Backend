@@ -1,0 +1,114 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//================Location 관련 테이블================
+model PositionAddressInfo {
+  userCode      String @id @unique
+  locLatitude   Int 
+  locLongtitude Int
+}
+
+model PostAddressInfo {
+  userCode      String 
+  addressCode   String @id
+  addressCodeInfo    PostAddressCodeDefineInfo?
+}
+
+model PostAddressCodeDefineInfo {
+  countryCode     Int     @unique
+  countryName     String  @unique
+  address1Code    Int     @unique
+  address1Name    String  @unique
+  address2Code    Int     @unique
+  address2Name    String  @unique
+  address3Code    Int     @unique
+  address3Name    String  @unique 
+  addressCode     String  @id @unique  
+  address         PostAddressInfo   @relation(fields: [addressCode], references: [addressCode])
+}
+
+//================User 관련 테이블================
+model UserInfo {
+  userCode      String    @id @unique
+  password      String
+  userBasicInfo UserBasicInfo? 
+}
+
+model UserBasicInfo {
+  userCode      String    @id @unique
+  avatar        String?
+  phoneNumber   String
+  email         String    @unique
+  checkPhone    Boolean   @default(false)
+  address       UserInfo   @relation(fields: [userCode], references: [userCode])
+  rooms     Room[]
+  Message   Message[]
+}
+
+//================Product 관련 테이블================
+model BuyInfo {
+  unique        String    @id
+  userCode      String 
+  bookMark      Boolean
+  transaction   Boolean
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model SellInfo {
+  unique        String    @id
+  userCode      String
+  mainComment   String
+  subComment    String
+  picture       String
+  amount        Int
+  transaction   Boolean
+  categoryCodeDefineInfo CategoryCodeDefineInfo @relation(fields: [categoryCode], references: [categoryCode])
+  categoryCode  String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model CategoryCodeDefineInfo {
+  category1Code    Int     
+  category1Name    String  
+  category2Code    Int     
+  category2Name    String  
+  category3Code    Int     
+  category3Name    String  
+  category4Code    Int     
+  category4Name    String  
+  categoryCode     String     @id @unique
+  sellInfo         SellInfo[]
+}
+
+//================Message 관련 테이블================
+
+model Room {
+  id        Int             @id @default(autoincrement())
+  users     UserBasicInfo[]
+  messages  Message[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model Message {
+  id        Int             @id @default(autoincrement())
+  payload   String
+  userCode  String
+  user      UserBasicInfo   @relation(fields: [userCode], references: [userCode])
+  room      Room            @relation(fields: [roomId], references: [id])
+  roomId    Int
+  read      Boolean         @default(false)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
