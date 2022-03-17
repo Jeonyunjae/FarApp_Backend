@@ -5,7 +5,7 @@ const userinfo = class UserInfo {
 
   // #region UserInfo Read
   userInfo(userCode) {
-    return client.userInfo.findUnique({ where: { userCode } });
+    return client.userInfo.findFirst({ where: { userCode } });
   }
   userInfos() {
     return client.userInfo.findMany();
