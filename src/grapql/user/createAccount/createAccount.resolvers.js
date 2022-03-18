@@ -1,6 +1,5 @@
 import { ApolloError } from "apollo-server";
 import bcrypt from "bcrypt";
-import { resourceLimits } from "worker_threads";
 import service from "../../../service/service";
 
 export default {
@@ -11,7 +10,6 @@ export default {
     ) => {
       // check if username or email are already on DB.
       let userInfoResult = await service.UserInfo.userInfo(userCode);
-
       if(userInfoResult){
         throw new ApolloError("Exist UserInfo", "EXIST_ID", {
           parameter: "id",
