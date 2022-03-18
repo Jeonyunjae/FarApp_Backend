@@ -31,7 +31,7 @@ const userinfo = class UserInfo {
 
   // #region UserInfo update
   update(userCode, password) {
-    client.userInfo.update({ where: { userCode }, data: { password } });
+    return client.userInfo.update({ where: { userCode }, data: { password } });
   }
 }
 //#endregion
