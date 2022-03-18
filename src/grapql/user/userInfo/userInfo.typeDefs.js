@@ -8,13 +8,4 @@ export default gql`
     createdAt: String!
     updatedAt: String!
   }
-  type Query {
-    userInfos: [UserInfo]
-    userInfo(userCode: String!): UserInfo
-  }
-  type Mutation {
-    createUserInfo(userCode: String!, password: String!): UserInfo
-    deleteUserInfo(iuserCode: String!): UserInfo
-    updateUserInfo(userCode: String!, password: String): UserInfo
-  }
 `;

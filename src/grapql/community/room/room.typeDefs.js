@@ -8,13 +8,4 @@ export default gql`
     createdAt: String!
     updatedAt: String!
   }
-  type Query {
-    rooms: [Room]
-    room(id: Int!): Room
-  }
-  type Mutation {
-    createRoom(id: Int!): Room
-    deleteRoom(id: Int!): Room
-    updateRoom(id: Int!): Room
-  }
 `;
