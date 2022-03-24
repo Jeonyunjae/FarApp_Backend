@@ -1,25 +1,26 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import * as jwt from "jsonwebtoken";
 import service from "../../../service/service";
+import { comparePassword } from "../utils/hash";
 require("dotenv").config();
+
 export default {
   Mutation: {
     login: async (_, { userCode, password }) => {
-      const user = await service.UserInfo.userInfo(userCode)
-      if (!user) {
+      const userInfo = await service.UserInfo.userInfo(userCode)
+      if (!userInfo) {
         return {
           ok: false,
           error: "User not found.",
         };
       }
-      const passwordOk = await bcrypt.compare(password, user.password);
+      const passwordOk = await comparePassword(password, userInfo.password);
       if (!passwordOk) {
         return {
           ok: false,
           error: "Incorrect password.",
         };
       }
-      const token = await jwt.sign({ id: user.userCode }, process.env.SECRET_KEY);
+      const token = await jwt.sign({ id: userInfo.userCode }, process.env.SECRET_KEY);
       return {
         ok: true,
         token,

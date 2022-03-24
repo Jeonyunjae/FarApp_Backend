@@ -1,6 +1,6 @@
 import { ApolloError } from "apollo-server";
-import bcrypt from "bcrypt";
 import service from "../../../service/service";
+import { hashPassword } from "../utils/hash";
 
 export default {
   Mutation: {
@@ -25,7 +25,7 @@ export default {
       }
 
       // hash password
-      const uglyPassword = await bcrypt.hash(password, 10);
+      const uglyPassword = await hashPassword(password);
 
       // save and return the user
       userInfoResult = await service.UserInfo.create(userCode, uglyPassword);

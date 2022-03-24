@@ -1,6 +1,6 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import * as jwt from "jsonwebtoken";
 import service from "../../../service/service";
+import { hashPassword } from "../utils/hash";
 import { protectedResolver } from "../utils/utils";
 
 export default {
@@ -9,12 +9,11 @@ export default {
       async (
         _,
         { userCode, password, phoneNumber, email },
-        { loggedInUser, protectResolver }
+        { loggedInUser }
       ) => {
-        protectResolver(loggedInUser);
         let uglyPassword = null;
         if (password) {
-          uglyPassword = await bcrypt.hash(password, 10);
+          uglyPassword = await hashPassword(password);
         }
 
         const updateUserInfo = await service.UserInfo.update(

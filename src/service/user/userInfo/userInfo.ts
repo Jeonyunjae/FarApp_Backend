@@ -1,10 +1,11 @@
-import client from "../../../service/client";
+import client from "../../client";
 
 
 const userinfo = class UserInfo {
 
   // #region UserInfo Read
-  userInfo(userCode) {
+  userInfo(userCode:string) {
+    console.log(userCode);
     return client.userInfo.findFirst({ where: { userCode } });
   }
   userInfos() {
@@ -13,13 +14,13 @@ const userinfo = class UserInfo {
   //#endregion
 
   // #region UserInfo delete
-  delete(userCode) {
+  delete(userCode:string) {
     client.userInfo.delete({ where: { userCode } });
   }
   //#endregion
 
   // #region UserInfo create
-  create(userCode, password) {
+  create(userCode:string, password:string) {
     return client.userInfo.create({
       data: {
         userCode,
@@ -30,7 +31,7 @@ const userinfo = class UserInfo {
   //#endregion
 
   // #region UserInfo update
-  update(userCode, password) {
+  update(userCode:string, password:string) {
     return client.userInfo.update({ where: { userCode }, data: { password } });
   }
 }

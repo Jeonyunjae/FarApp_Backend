@@ -1,4 +1,4 @@
-import client from "../../../service/client";
+import client from "../../client";
 
 
 const userbasicinfo = class UserBasicInfo {
