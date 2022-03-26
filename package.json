@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "nodemon --exec ts-node src/server --ext ts,js",
-    "migrate": "npx prisma migrate dev --preview-feature"
+    "migrate": "npx prisma migrate dev --preview-feature",
+    "preinstall": "npx npm-force-resolutions"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,8 @@
     "@babel/core": "^7.17.5",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
+    "@types/express": "^4.17.13",
+    "@types/graphql-upload": "^8.0.11",
     "@types/node": "^17.0.21",
     "nodemon": "^2.0.15",
     "prisma": "^3.10.0",
@@ -34,10 +37,18 @@
     "@prisma/client": "^3.10.0",
     "@types/bcrypt": "^5.0.0",
     "apollo-server": "^3.6.3",
+    "apollo-server-express": "^3.6.6",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
+    "express": "^4.17.3",
     "graphql": "^16.3.0",
-    "jsonwebtoken": "^8.5.1"
+    "graphql-upload": "^13.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0"
+  },
+  "resolutions": {
+    "fs-capacitor": "^6.2.0",
+    "graphql-upload": "^11.0.0"
   },
   "main": "server.js"
 }

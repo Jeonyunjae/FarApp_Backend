@@ -3,22 +3,20 @@ import client from "../../client";
 
 const userinfo = class UserInfo {
 
-  // #region UserInfo Read
   userInfo(userCode:string) {
     return client.userInfo.findFirst({ where: { userCode } });
   }
+
   userInfos() {
     return client.userInfo.findMany();
   }
-  //#endregion
 
-  // #region UserInfo delete
+  
+
   delete(userCode:string) {
     client.userInfo.delete({ where: { userCode } });
   }
-  //#endregion
 
-  // #region UserInfo create
   create(userCode:string, password:string) {
     return client.userInfo.create({
       data: {
@@ -27,13 +25,10 @@ const userinfo = class UserInfo {
       },
     });
   }
-  //#endregion
 
-  // #region UserInfo update
-  update(userCode:string, password:string) {
+  updatePassword(userCode:string, password:string) {
     return client.userInfo.update({ where: { userCode }, data: { password } });
   }
 }
-//#endregion
 
 export default userinfo;
