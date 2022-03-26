@@ -5,7 +5,6 @@ const userinfo = class UserInfo {
 
   // #region UserInfo Read
   userInfo(userCode:string) {
-    console.log(userCode);
     return client.userInfo.findFirst({ where: { userCode } });
   }
   userInfos() {

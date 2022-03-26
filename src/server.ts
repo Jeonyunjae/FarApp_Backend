@@ -1,10 +1,11 @@
 require("dotenv").config();
 import { ApolloServer } from "apollo-server";
 import { getUser, protectedResolver } from "./grapql/users/utils/utils";
-import schema from "./schema";
+import {typeDefs, resolvers } from "./schema";
 
 const server = new ApolloServer({
-  schema,
+  resolvers,
+  typeDefs,
   context: async ({ req }) => {
     return {
       loggedInUser: await getUser(req.headers.token),
