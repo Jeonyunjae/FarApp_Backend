@@ -34,7 +34,7 @@ const userbasicinfo = class UserBasicInfo {
 
   // #region UserInfo update
   updateAll(userCode, phoneNumber, email, avatar) {
-    return client.userBasicInfo.update({ where: { userCode }, data: { phoneNumber, email } });
+    return client.userBasicInfo.update({ where: { userCode }, data: { phoneNumber, email, avatar } });
   }
   updatePhoneNumber(userCode, phoneNumber) {
     return client.userBasicInfo.update({ where: { userCode }, data: { phoneNumber } });
