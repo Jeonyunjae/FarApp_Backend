@@ -7,6 +7,11 @@ const userbasicinfo = class UserBasicInfo {
   userBasicInfo(userCode) {
     return client.userBasicInfo.findUnique({ where: { userCode } });
   }
+
+  userBasicInfoEmail(email) {
+    return client.userBasicInfo.findUnique({ where: { email } });
+  }
+
   userBasicInfos() {
     return client.userBasicInfo.findMany();
   }

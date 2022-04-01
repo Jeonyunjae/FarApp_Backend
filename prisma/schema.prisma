@@ -59,6 +59,7 @@ model UserBasicInfo {
 }
 
 //================Product 관련 테이블================
+//사고싶은 물품이나 리스트
 model BuyInfo {
   unique        String    @id
   userCode      String 
@@ -68,6 +69,7 @@ model BuyInfo {
   updatedAt     DateTime  @updatedAt
 }
 
+//판
 model SellInfo {
   unique        String    @id
   userCode      String

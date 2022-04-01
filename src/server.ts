@@ -5,7 +5,7 @@ import * as express from "express";
 import * as morgan from 'morgan';
 import { getUser, protectedResolver } from "./grapql/users/utils/utils";
 import { typeDefs, resolvers } from "./schema";
-
+import FacebookStrategy from 'passport-facebook';
 
 const PORT = process.env.PORT;
 
