@@ -54,19 +54,32 @@ model UserBasicInfo {
   address       UserInfo   @relation(fields: [userCode], references: [userCode])
   rooms         Room[]
   Message       Message[]
+  likes     Like[]
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 }
 
 //================Product 관련 테이블================
 //사고싶은 물품이나 리스트
-model BuyInfo {
-  unique        String    @id
-  userCode      String 
-  bookMark      Boolean
-  transaction   Boolean
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+//model BuyInfo {
+//  unique        String    @id
+//  userCode      String 
+//  bookMark      Boolean
+//  transaction   Boolean
+//  createdAt     DateTime  @default(now())
+//  updatedAt     DateTime  @updatedAt
+//}
+
+model Like {
+  id            Int               @id @default(autoincrement())
+  sellInfo      SellInfo          @relation(fields: [unique], references: [unique])
+  userBasicInfo UserBasicInfo     @relation(fields: [userdCode], references: [userCode])
+  unique        String
+  userdCode     String
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@unique([unique, userdCode])
 }
 
 //판
@@ -78,6 +91,7 @@ model SellInfo {
   picture       String
   amount        Int
   transaction   Boolean
+  likes     Like[]
   categoryCodeDefineInfo CategoryCodeDefineInfo @relation(fields: [categoryCode], references: [categoryCode])
   categoryCode  String
   createdAt DateTime        @default(now())

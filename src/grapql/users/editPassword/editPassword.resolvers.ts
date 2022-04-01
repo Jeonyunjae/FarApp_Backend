@@ -5,12 +5,12 @@ require("dotenv").config();
 
 export default {
   Mutation: {
-    editPassword: async (_, { id, password }) => {
+    editPassword: async (_, { userCode, password }) => {
 
       // hash password
       const uglyPassword = await hashPassword(password);
 
-      const userBaiscInfo = await service.UserBasicInfo.updatePassword(id, uglyPassword)
+      const userBaiscInfo = await service.UserBasicInfo.updatePassword(userCode, uglyPassword)
       if (!userBaiscInfo) {
         return {
           ok: false,
