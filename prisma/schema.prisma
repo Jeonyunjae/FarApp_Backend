@@ -30,7 +30,6 @@ model PostAddressInfo {
   addressCode   String @id
   addressCodeInfo    PostAddressCodeDefineInfo?
   userLocation      UserLocation   @relation(fields: [userCode], references: [userCode])
-
 }
 
 model PostAddressCodeDefineInfo {

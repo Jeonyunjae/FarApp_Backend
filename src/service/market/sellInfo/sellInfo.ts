@@ -1,6 +1,6 @@
 import client from "../../client";
 
-const sellInfo = class SellInfo {
+const sellinfo = class SellInfo {
   // #region UserInfo Read
   sellInfo(unique) {
     return client.sellInfo.findUnique({ where: { unique } });
@@ -26,10 +26,10 @@ const sellInfo = class SellInfo {
     picture,
     amount,
     transaction,
-    hashtags,
+    hashtagObj,
     categoryCode
   ) {
-    const infoResult = client.sellInfo.create({
+    return client.sellInfo.create({
       data: {
         unique,
         userCode,
@@ -38,36 +38,29 @@ const sellInfo = class SellInfo {
         picture,
         amount,
         transaction,
-        hashtags: {
-          connectOrCreate: [
-            {
-              where: {
-                hashtag: "#food",
-              },
-              create: {
-                hashtag: "#food",
-              },
-            },
-          ],
-        },
+        ...(hashtagObj.length > 0 && {
+          hashtags: {
+            connectOrCreate: hashtagObj,
+          },
+        }),
         categoryCode,
       },
     });
-
-    return infoResult;
   }
   //#endregion
 
   // #region UserInfo update
-  updateAll(unique,
+  updateAll(
+    unique,
     userCode,
     mainComment,
     subComment,
     picture,
     amount,
     transaction,
-    hashtags,
-    categoryCode) {
+    hashtagObj,
+    categoryCode
+  ) {
     return client.sellInfo.update({
       where: { unique },
       data: {
@@ -77,7 +70,11 @@ const sellInfo = class SellInfo {
         picture,
         amount,
         transaction,
-        hashtags,
+        ...(hashtagObj.length > 0 && {
+          hashtags: {
+            connectOrCreate: hashtagObj,
+          },
+        }),
         categoryCode,
       },
     });
@@ -85,4 +82,4 @@ const sellInfo = class SellInfo {
 };
 //#endregion
 
-export default sellInfo;
+export default sellinfo;
