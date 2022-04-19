@@ -1,7 +1,7 @@
 import client from "../../client";
 
 
-const userbasicinfo = class UserBasicInfo {
+class UserBasicInfo {
 
   // #region UserInfo Read
   userBasicInfo(userCode) {
@@ -53,4 +53,4 @@ const userbasicinfo = class UserBasicInfo {
 }
 //#endregion
 
-export default userbasicinfo;
+export default UserBasicInfo;

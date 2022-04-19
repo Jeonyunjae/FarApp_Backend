@@ -1,15 +1,19 @@
+import HashTag from "./market/hashtag/hashTag";
+import SellInfo from "./market/sellInfo/sellInfo";
 import sellinfo from "./market/sellInfo/sellInfo";
-import userbasicinfo from "./user/userBasicInfo/userBasicInfo";
-import userinfo from "./user/userInfo/userInfo";
+import UserBasicInfo from "./user/userBasicInfo/userBasicInfo";
+import UserInfo from "./user/userInfo/userInfo";
 
 class Service{
-    UserInfo: any = null;
-    UserBasicInfo: any = null;
-    SellInfo: any = null;
+    UserInfo: UserInfo = null;
+    UserBasicInfo: UserBasicInfo = null;
+    SellInfo: SellInfo = null;
+    HashTag: HashTag = null;
     constructor(){
-        this.UserInfo = userinfo;
-        this.UserBasicInfo = userbasicinfo;
-        this.SellInfo = sellinfo;
+        this.UserInfo = new UserInfo();
+        this.UserBasicInfo = new UserBasicInfo();
+        this.SellInfo = new SellInfo();
+        this.HashTag = new HashTag();
     }
 }
 

@@ -1,12 +1,15 @@
 import * as jwt from "jsonwebtoken";
 import service from "../../../service/service";
+import { Resolvers } from "../../../types";
 import { comparePassword } from "../utils/hash";
 require("dotenv").config();
 
-export default {
+const resolvers: Resolvers = {
   Mutation: {
     login: async (_, { userCode, password }) => {
       const userInfo = await service.UserInfo.userInfo(userCode)
+      
+      console.log(userInfo);
       if (!userInfo) {
         return {
           ok: false,
@@ -28,3 +31,5 @@ export default {
     },
   },
 };
+
+export default resolvers;

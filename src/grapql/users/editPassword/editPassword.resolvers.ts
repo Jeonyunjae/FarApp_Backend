@@ -10,7 +10,7 @@ export default {
       // hash password
       const uglyPassword = await hashPassword(password);
 
-      const userBaiscInfo = await service.UserBasicInfo.updatePassword(userCode, uglyPassword)
+      const userBaiscInfo = await service.UserInfo.updatePassword(userCode, uglyPassword)
       if (!userBaiscInfo) {
         return {
           ok: false,

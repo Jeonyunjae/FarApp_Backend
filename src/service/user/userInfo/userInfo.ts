@@ -1,7 +1,7 @@
 import client from "../../client";
 
 
-const userinfo = class UserInfo {
+class UserInfo {
 
   userInfo(userCode:string) {
     return client.userInfo.findFirst({ where: { userCode } });
@@ -31,4 +31,4 @@ const userinfo = class UserInfo {
   }
 }
 
-export default userinfo;
+export default UserInfo;

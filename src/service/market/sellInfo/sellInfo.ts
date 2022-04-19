@@ -1,6 +1,6 @@
 import client from "../../client";
 
-const sellinfo = class SellInfo {
+class SellInfo {
   // #region UserInfo Read
   sellInfo(unique) {
     return client.sellInfo.findUnique({ where: { unique } });
@@ -82,4 +82,4 @@ const sellinfo = class SellInfo {
 };
 //#endregion
 
-export default sellinfo;
+export default SellInfo;

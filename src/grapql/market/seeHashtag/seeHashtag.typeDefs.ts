@@ -1,9 +1,8 @@
-
 import { gql } from "apollo-server";
 
 export default gql`
   type Query {
-    "프로필 확인 API"
-    seeProduct(unique: String!): SellInfo
+    "해쉬태그 확인 API"
+    seeHashtag(hashtag: String!): Hashtag
   }
 `;

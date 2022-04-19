@@ -6,6 +6,7 @@ export default gql`
     userCode: String
     mainComment: String
     subComment: String
+    hashtags: [Hashtag]
     picture: String
     amount: Int
     transaction: Boolean

@@ -4,8 +4,8 @@ import { Resolvers } from "../../../types";
 
 const resolvers: Resolvers = {
   Query: {
-    seeProduct: (_, { userCode }, {loggedInUser}) =>
-      service.UserInfo.userInfo(userCode)
+    seeProduct: (_, { unique }, {loggedInUser}) =>
+      service.SellInfo.sellInfo(unique)
   },
 };
 

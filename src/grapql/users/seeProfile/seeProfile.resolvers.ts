@@ -1,4 +1,3 @@
-import { Resolver } from "dns";
 import service from "../../../service/service";
 import { Resolvers } from "../../../types";
 

@@ -10,14 +10,14 @@ export default {
         let hashtagObj = [];
         let unique, transaction = null;
         if (mainComment) {
-          const hashtags = mainComment.match(/#[\w]+/g);
+          const hashtags = mainComment.match(/#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]+/g);
           hashtagObj = hashtags.map((hashtag) => ({
             where: { hashtag },
             create: { hashtag },
           }));
         }
         unique = nanoid() //=> "V1StGXR8_Z5jdHi6B-myT"
-        transaction = 0;
+        transaction = true;
         return service.SellInfo.create(
           unique,
           loggedInUser.userCode,
