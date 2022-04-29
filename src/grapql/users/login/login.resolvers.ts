@@ -5,7 +5,7 @@ import { comparePassword } from "../utils/hash";
 require("dotenv").config();
 
 const resolvers: Resolvers = {
-  Mutation: {
+  Query : {
     login: async (_, { userCode, password }) => {
       const userInfo = await service.UserInfo.userInfo(userCode)
       

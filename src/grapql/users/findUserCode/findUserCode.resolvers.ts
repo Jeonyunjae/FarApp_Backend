@@ -4,7 +4,7 @@ import { comparePassword } from "../utils/hash";
 require("dotenv").config();
 
 export default {
-  Mutation: {
+  Query: {
     findUserCode: async (_, { email }) => {
       const userBaiscInfo = await service.UserBasicInfo.userBasicInfoEmail(email)
       if (!userBaiscInfo) {
