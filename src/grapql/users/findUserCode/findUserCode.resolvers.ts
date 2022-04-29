@@ -1,5 +1,9 @@
 import * as jwt from "jsonwebtoken";
 import service from "../../../service/service";
+import { logManager } from "../../../utilty/logManager/logManager";
+import ERROR_CODE from "../../../utilty/type/errorCode";
+import LEVEL from "../../../utilty/type/level";
+import { returnValue } from "../../shared/shared";
 import { comparePassword } from "../utils/hash";
 require("dotenv").config();
 
@@ -8,15 +12,9 @@ export default {
     findUserCode: async (_, { email }) => {
       const userBaiscInfo = await service.UserBasicInfo.userBasicInfoEmail(email)
       if (!userBaiscInfo) {
-        return {
-          ok: false,
-          error: "User not found.",
-        };
+        logManager(LEVEL.ERROR, ERROR_CODE.FINDUSERCODE_USER_NOT_FOUND);
       }
-      return {
-        ok: true,
-        id: userBaiscInfo.userCode,
-      };
+      return returnValue(true, userBaiscInfo.userCode);
     },
   },
 };

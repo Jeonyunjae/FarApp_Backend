@@ -1,6 +1,5 @@
 import HashTag from "./market/hashtag/hashTag";
 import SellInfo from "./market/sellInfo/sellInfo";
-import sellinfo from "./market/sellInfo/sellInfo";
 import UserBasicInfo from "./user/userBasicInfo/userBasicInfo";
 import UserInfo from "./user/userInfo/userInfo";
 

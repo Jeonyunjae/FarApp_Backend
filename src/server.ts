@@ -6,8 +6,8 @@ import * as morgan from "morgan";
 import { getUser, protectedResolver } from "./grapql/users/utils/utils";
 import { typeDefs, resolvers } from "./schema";
 import { Stream } from "./utilty/logger/winston";
-import Logger from "./utilty/logger/logger";
 import LEVEL from "./utilty/type/level";
+import { logManager } from "./utilty/logManager/\blogManager";
 
 const PORT = process.env.PORT;
 
@@ -31,6 +31,6 @@ const startServer = async () => {
   server.applyMiddleware({ app });
   app.use("/static", express.static("uploads"));
   await new Promise((func: any) => app.listen({ port: PORT }, func));
-  Logger(LEVEL.INFO,`🚀 Server: http://localhost:${PORT}${server.graphqlPath}`)
+  logManager(LEVEL.INFO, 0,`🚀 Server: http://localhost:${PORT}${server.graphqlPath}`)
 };
 startServer();

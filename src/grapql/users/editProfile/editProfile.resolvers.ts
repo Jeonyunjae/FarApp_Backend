@@ -1,6 +1,10 @@
 import { createWriteStream } from "fs";
 import { GraphQLUpload } from "graphql-upload";
 import service from "../../../service/service";
+import { logManager } from "../../../utilty/logManager/logManager";
+import ERROR_CODE from "../../../utilty/type/errorCode";
+import LEVEL from "../../../utilty/type/level";
+import { returnValue } from "../../shared/shared";
 import { hashPassword } from "../utils/hash";
 import { uploadServerFile } from "../utils/upload";
 import { protectedResolver } from "../utils/utils";
@@ -26,14 +30,9 @@ const resolverFn = async (
     phoneNumber !== updateUserBasicInfo.phoneNumber ||
     email !== updateUserBasicInfo.email
   ) {
-    return {
-      ok: false,
-      error: "Fail UserBasicInfo Update.",
-    };
+    logManager(LEVEL.ERROR, ERROR_CODE.FINDUSERCODE_FAIL_USERBASICINFO_UPDATE);
   }
-  return {
-    ok: true,
-  };
+  return returnValue(true, userCode);
 };
 
 export default {
