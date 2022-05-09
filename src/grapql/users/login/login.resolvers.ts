@@ -8,8 +8,9 @@ import { comparePassword } from "../utils/hash";
 require("dotenv").config();
 
 const resolvers: Resolvers = {
-  Query : {
+  Mutation : {
     login: async (_, { userCode, password }) => {
+      logManager(LEVEL.DEBUG, userCode);
       const userInfo = await service.UserInfo.userInfo(userCode)
       
       if (!userInfo) {

@@ -36,10 +36,9 @@ const resolverFn = async (
     categoryCode
   );
 
-  if(!sellinfo){
+  if (!sellinfo) {
     logManager(LEVEL.ERROR, ERROR_CODE.UPLOADPRODUCT_FAIL_INSERT_SELLINFO);
   }
-
 
   return sellinfo;
 };
