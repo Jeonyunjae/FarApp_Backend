@@ -3,7 +3,7 @@ import LEVEL from "../type/level";
 import Logger from "../logger/logger";
 import ERROR_CODE from "../type/errorCode";
 
-export const logManager = (level: any, ErrorCode: ERROR_CODE, msg: string = "") => {
+export const logManager = (level: any, ErrorCode: ERROR_CODE, msg: any = null) => {
   switch (level) {
     case LEVEL.ERROR:
       Logger(level, ErrorCode);
