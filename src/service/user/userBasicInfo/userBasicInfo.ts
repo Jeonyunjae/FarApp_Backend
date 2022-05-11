@@ -15,6 +15,30 @@ class UserBasicInfo {
   userBasicInfos() {
     return client.userBasicInfo.findMany();
   }
+
+  userBasicInfoToSeeFollowers(userCode, page) {
+    return client.userBasicInfo.findUnique({ where: { userCode } }).followers({
+      take: 5,
+      skip: (page - 1) * 5,
+    });
+  }
+
+  userBasicInfoToSeeFollowing(userCode, lastUserCode){
+    return client.userBasicInfo
+        .findUnique({ where: { userCode } })
+        .following({
+          take: 5,
+          skip: lastUserCode ? 1 : 0,
+          ...(lastUserCode && { cursor: { userCode: lastUserCode } }),
+        });
+  }
+
+  userBasicInfoToFollowTotalCount(userCode) {
+    return client.userBasicInfo.count({
+      where: { following: { some: { userCode } } },
+    });
+  }
+
   //#endregion
 
   // #region UserInfo delete

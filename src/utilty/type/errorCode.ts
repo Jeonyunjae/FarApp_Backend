@@ -25,6 +25,20 @@ enum ERROR_CODE {
 
   //uploadProduct
   UPLOADPRODUCT_FAIL_INSERT_SELLINFO = 701,
+
+
+  //followUser
+  FOLLOWUSER_USER_NOT_FOUND = 801,
+
+  //seeFollowers
+  SEEFOLLOWERS_USER_NOT_FOUND = 901,
+
+
+  //unFollowUser
+  UNFOLLOWUSER_USER_NOT_FOUND = 1001,
+
+  //seeFollowing
+  SEEFOLLOWING_USER_NOT_FOUND = 1101,
 }
 export default ERROR_CODE;
 

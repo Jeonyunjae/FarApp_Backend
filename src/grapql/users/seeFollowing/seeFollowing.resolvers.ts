@@ -4,10 +4,10 @@ import ERROR_CODE from "../../../utilty/type/errorCode";
 import LEVEL from "../../../utilty/type/level";
 import { protectedResolver } from "../utils/utils";
 
-const resolverFn = async (_, { userCode }, { loggedInUser }) => {
+const resolverFn = async (_, { userCode, lastUserCode }, { loggedInUser }) => {
   const userbasicinfo = await service.UserBasicInfo.userBasicInfo(userCode);
   if (!userbasicinfo) {
-    logManager(LEVEL.ERROR, ERROR_CODE.UNFOLLOWUSER_USER_NOT_FOUND);
+    logManager(LEVEL.ERROR, ERROR_CODE.SEEFOLLOWING_USER_NOT_FOUND);
   }
 
   const userBaiscInfo = await service.UserBasicInfo.updateUnFollow(
@@ -17,13 +17,16 @@ const resolverFn = async (_, { userCode }, { loggedInUser }) => {
 
   logManager(LEVEL.INFO, ERROR_CODE.NONE, JSON.stringify(userBaiscInfo));
 
+  const following = await service.UserBasicInfo.userBasicInfoToSeeFollowing(userCode, lastUserCode)
+  
   return {
     ok: true,
+    following,
   };
 };
 
 export default {
-  Mutation: {
-    unfollowUser: protectedResolver(resolverFn),
+  Query: {
+    seeFollowing: protectedResolver(resolverFn),
   },
 };
