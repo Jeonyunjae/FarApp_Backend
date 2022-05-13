@@ -7,15 +7,13 @@ import { protectedResolver } from "../utils/utils";
 const resolverFn = async (_, { userCode }, { loggedInUser }) => {
   const userbasicinfo = await service.UserBasicInfo.userBasicInfo(userCode);
   if (!userbasicinfo) {
-    logManager(LEVEL.ERROR, ERROR_CODE.FOLLOWUSER_USER_NOT_FOUND);
+    logManager.Error(ERROR_CODE.FOLLOWUSER_USER_NOT_FOUND);
   }
 
   const userBaiscInfo = await service.UserBasicInfo.updateFollow(
     userCode,
     loggedInUser
   );
-
-  logManager(LEVEL.INFO, ERROR_CODE.NONE, JSON.stringify(userBaiscInfo));
 
   return {
     ok: true,

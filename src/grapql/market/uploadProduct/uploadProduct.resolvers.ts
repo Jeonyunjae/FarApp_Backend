@@ -37,7 +37,7 @@ const resolverFn = async (
   );
 
   if (!sellinfo) {
-    logManager(LEVEL.ERROR, ERROR_CODE.UPLOADPRODUCT_FAIL_INSERT_SELLINFO);
+    logManager.Error(ERROR_CODE.UPLOADPRODUCT_FAIL_INSERT_SELLINFO);
   }
 
   return sellinfo;

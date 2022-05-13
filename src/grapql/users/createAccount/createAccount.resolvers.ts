@@ -13,10 +13,7 @@ export default {
       // check if username or email are already on DB.
       let userInfoResult = await service.UserInfo.userInfo(userCode);
       if (userInfoResult) {
-        logManager(
-          LEVEL.ERROR,
-          ERROR_CODE.CREATEACCOUNT_EXIST_USERINFO
-        );
+        logManager.Error(ERROR_CODE.CREATEACCOUNT_EXIST_USERINFO);
       }
 
       let userBasicInfoResult = await service.UserBasicInfo.userBasicInfo(
@@ -24,10 +21,7 @@ export default {
       );
 
       if (userBasicInfoResult) {
-        logManager(
-          LEVEL.ERROR,
-          ERROR_CODE.CREATEACCOUNT_EXIST_USERBASICINFO
-        );
+        logManager.Error(ERROR_CODE.CREATEACCOUNT_EXIST_USERBASICINFO);
       }
 
       // hash password
@@ -37,10 +31,7 @@ export default {
       userInfoResult = await service.UserInfo.create(userCode, uglyPassword);
 
       if (!userInfoResult) {
-        logManager(
-          LEVEL.ERROR,
-          ERROR_CODE.CREATEACCOUNT_FAIL_INSERT_USERINFO
-        );
+        logManager.Error(ERROR_CODE.CREATEACCOUNT_FAIL_INSERT_USERINFO);
       }
 
       userBasicInfoResult = await service.UserBasicInfo.create(
@@ -50,10 +41,7 @@ export default {
       );
 
       if (!userBasicInfoResult) {
-        logManager(
-          LEVEL.ERROR,
-          ERROR_CODE.CREATEACCOUNT_FAIL_INSERT_BASICINFO
-        );
+        logManager.Error(ERROR_CODE.CREATEACCOUNT_FAIL_INSERT_BASICINFO);
       }
       return returnValue(true, userCode);
     },

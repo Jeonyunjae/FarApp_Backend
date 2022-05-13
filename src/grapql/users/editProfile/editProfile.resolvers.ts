@@ -30,7 +30,7 @@ const resolverFn = async (
     phoneNumber !== updateUserBasicInfo.phoneNumber ||
     email !== updateUserBasicInfo.email
   ) {
-    logManager(LEVEL.ERROR, ERROR_CODE.FINDUSERCODE_FAIL_USERBASICINFO_UPDATE);
+    logManager.Error(ERROR_CODE.FINDUSERCODE_FAIL_USERBASICINFO_UPDATE);
   }
   return returnValue(true, userCode);
 };

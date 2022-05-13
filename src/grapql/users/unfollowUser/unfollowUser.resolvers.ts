@@ -7,7 +7,7 @@ import { protectedResolver } from "../utils/utils";
 const resolverFn = async (_, { userCode }, { loggedInUser }) => {
   const userbasicinfo = await service.UserBasicInfo.userBasicInfo(userCode);
   if (!userbasicinfo) {
-    logManager(LEVEL.ERROR, ERROR_CODE.UNFOLLOWUSER_USER_NOT_FOUND);
+    logManager.Error(ERROR_CODE.UNFOLLOWUSER_USER_NOT_FOUND);
   }
 
   const userBaiscInfo = await service.UserBasicInfo.updateUnFollow(

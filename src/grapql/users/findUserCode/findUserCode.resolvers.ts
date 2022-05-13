@@ -12,7 +12,7 @@ export default {
     findUserCode: async (_, { email }) => {
       const userBaiscInfo = await service.UserBasicInfo.userBasicInfoEmail(email)
       if (!userBaiscInfo) {
-        logManager(LEVEL.ERROR, ERROR_CODE.FINDUSERCODE_USER_NOT_FOUND);
+        logManager.Error(ERROR_CODE.FINDUSERCODE_USER_NOT_FOUND);
       }
       return returnValue(true, userBaiscInfo.userCode);
     },

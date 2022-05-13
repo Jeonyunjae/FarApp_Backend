@@ -18,11 +18,7 @@ export default {
         uglyPassword
       );
       if (!userBaiscInfo || userBaiscInfo.password !== uglyPassword) {
-        logManager(
-          LEVEL.ERROR,
-          ERROR_CODE.EDITPASSWORD_FAIL_PASSWORD_UPDATE
-        );
-
+        logManager.Error(ERROR_CODE.EDITPASSWORD_FAIL_PASSWORD_UPDATE);
       }
       return returnValue(true, userCode);
     },

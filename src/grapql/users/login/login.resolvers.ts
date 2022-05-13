@@ -8,21 +8,23 @@ import { comparePassword } from "../utils/hash";
 require("dotenv").config();
 
 const resolvers: Resolvers = {
-  Mutation : {
+  Mutation: {
     login: async (_, { userCode, password }) => {
-      logManager(LEVEL.DEBUG, userCode);
-      const userInfo = await service.UserInfo.userInfo(userCode)
-      
+      const userInfo = await service.UserInfo.userInfo(userCode);
+
       if (!userInfo) {
-        logManager(LEVEL.ERROR, ERROR_CODE.LOGIN_USER_NOT_FOUND);
+        logManager.Error(ERROR_CODE.LOGIN_USER_NOT_FOUND);
       }
       const passwordOk = await comparePassword(password, userInfo.password);
-      
+
       if (!passwordOk) {
-        logManager(LEVEL.ERROR, ERROR_CODE.LOGIN_INCORRECT_PASSWORD);
+        logManager.Error(ERROR_CODE.LOGIN_INCORRECT_PASSWORD);
       }
-      
-      const token = await jwt.sign({ id: userInfo.userCode }, process.env.SECRET_KEY);
+
+      const token = await jwt.sign(
+        { id: userInfo.userCode },
+        process.env.SECRET_KEY
+      );
       return {
         ok: true,
         token,

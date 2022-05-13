@@ -7,15 +7,13 @@ import { protectedResolver } from "../utils/utils";
 const resolverFn = async (_, { userCode, lastUserCode }, { loggedInUser }) => {
   const userbasicinfo = await service.UserBasicInfo.userBasicInfo(userCode);
   if (!userbasicinfo) {
-    logManager(LEVEL.ERROR, ERROR_CODE.SEEFOLLOWING_USER_NOT_FOUND);
+    logManager.Error(ERROR_CODE.SEEFOLLOWING_USER_NOT_FOUND);
   }
 
   const userBaiscInfo = await service.UserBasicInfo.updateUnFollow(
     userCode,
     loggedInUser
   );
-
-  logManager(LEVEL.INFO, ERROR_CODE.NONE, JSON.stringify(userBaiscInfo));
 
   const following = await service.UserBasicInfo.userBasicInfoToSeeFollowing(userCode, lastUserCode)
   

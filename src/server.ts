@@ -31,6 +31,6 @@ const startServer = async () => {
   server.applyMiddleware({ app });
   app.use("/static", express.static("uploads"));
   await new Promise((func: any) => app.listen({ port: PORT }, func));
-  logManager(LEVEL.INFO, 0,`🚀 Server: http://localhost:${PORT}${server.graphqlPath}`)
+  logManager.Info(`🚀 Server: http://localhost:${PORT}${server.graphqlPath}`)
 };
 startServer();

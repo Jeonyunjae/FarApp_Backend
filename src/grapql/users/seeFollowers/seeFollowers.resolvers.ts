@@ -7,7 +7,7 @@ import { protectedResolver } from "../utils/utils";
 const resolverFn = async (_, { userCode, page }, { loggedInUser }) => {
   const userbasicinfo = await service.UserBasicInfo.userBasicInfo(userCode);
   if (!userbasicinfo) {
-    logManager(LEVEL.ERROR, ERROR_CODE.SEEFOLLOWERS_USER_NOT_FOUND);
+    logManager.Error(ERROR_CODE.SEEFOLLOWERS_USER_NOT_FOUND);
   }
   const followers = await service.UserBasicInfo.userBasicInfoToSeeFollowers(
     userCode,

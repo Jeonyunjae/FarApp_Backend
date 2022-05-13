@@ -26,8 +26,7 @@ export const getUser = async (token: any) => {
 export const protectedResolver =
   (ourResolver) => (root: any, args: any, context: Context, info: any) => {
     if (!context.loggedInUser) {
-      return logManager(
-        LEVEL.ERROR,
+      return logManager.Error(
         ERROR_CODE.PLEASE_LOG_IN_TO_PERFORM_THIS_ACTION
       );
     }

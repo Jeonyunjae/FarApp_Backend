@@ -20,7 +20,6 @@ class UserBasicInfo {
   }
 
   userBasicInfoToSeeProfile(userCode) {
-    logManager(LEVEL.INFO, ERROR_CODE.NONE, userCode);
     return client.userBasicInfo.findUnique({
       where: {
         userCode,

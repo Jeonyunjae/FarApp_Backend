@@ -8,7 +8,7 @@ import { protectedResolver } from "../utils/utils";
 const resolverFn = async (_, { userCode }, { loggedInUser }) => {
   const userbasicinfo = await service.UserBasicInfo.userBasicInfoToSeeProfile(userCode);
   if (!userbasicinfo) {
-    logManager(LEVEL.ERROR, ERROR_CODE.SEEPROFILE_USER_NOT_FOUND);
+    logManager.Error(ERROR_CODE.SEEPROFILE_USER_NOT_FOUND);
   }
   return userbasicinfo;
 };

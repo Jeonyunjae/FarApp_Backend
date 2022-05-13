@@ -9,7 +9,6 @@ export default {
         service.UserBasicInfo.userBasicInfo(userCode);
     },
     hashtags: ({ unique }) => {
-        logManager(LEVEL.INFO, ERROR_CODE.NONE, unique)
         service.HashTag.hashTagToSellInfo(unique);
     }
       
