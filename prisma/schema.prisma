@@ -113,7 +113,7 @@ model Like {
 model Hashtag {
   id        Int      @id @default(autoincrement())
   hashtag   String   @unique
-  photos    SellInfo[]
+  sellInfo  SellInfo[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

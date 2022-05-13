@@ -2,7 +2,7 @@ import client from "../../client";
 
 class SellInfo {
   // #region UserInfo Read
-  sellInfo(unique) {
+  sellInfoToSeeProduct(unique) {
     return client.sellInfo.findUnique({ where: { unique } });
   }
 

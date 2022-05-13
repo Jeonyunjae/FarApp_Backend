@@ -5,7 +5,7 @@ import { Resolvers } from "../../../types";
 const resolvers: Resolvers = {
   Query: {
     seeProduct: (_, { unique }, {loggedInUser}) =>
-      service.SellInfo.sellInfo(unique)
+      service.SellInfo.sellInfoToSeeProduct(unique)
   },
 };
 

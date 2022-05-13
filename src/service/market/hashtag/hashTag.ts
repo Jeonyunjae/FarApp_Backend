@@ -12,10 +12,14 @@ class HashTag {
     return client.hashtag.findMany();
   }
 
-  hashTagToSellInfo(id){
+  hashTagToSellInfo(unique){
     return client.hashtag.findMany({
       where: {
-        
+        sellInfo: {
+          some: {
+            unique: unique,
+          },
+        },
       },
     })
   }
