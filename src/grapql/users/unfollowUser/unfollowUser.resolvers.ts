@@ -15,7 +15,6 @@ const resolverFn = async (_, { userCode }, { loggedInUser }) => {
     loggedInUser
   );
 
-  logManager(LEVEL.INFO, ERROR_CODE.NONE, JSON.stringify(userBaiscInfo));
 
   return {
     ok: true,

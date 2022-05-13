@@ -4,13 +4,23 @@ import client from "../../client";
 class HashTag {
 
   // #region UserInfo Read
-  HashTag(hashtag) {
+  hashTag(hashtag) {
     return client.hashtag.findUnique({ where: { hashtag } });
   }
 
-  HashTags() {
+  hashTags() {
     return client.hashtag.findMany();
   }
+
+  hashTagToSellInfo(id){
+    return client.hashtag.findMany({
+      where: {
+        
+      },
+    })
+  }
+
+
   //#endregion
 
   // #region UserInfo delete

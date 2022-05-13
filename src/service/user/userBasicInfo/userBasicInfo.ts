@@ -1,3 +1,6 @@
+import { logManager } from "../../../utilty/logManager/\blogManager";
+import ERROR_CODE from "../../../utilty/type/errorCode";
+import LEVEL from "../../../utilty/type/level";
 import client from "../../client";
 
 class UserBasicInfo {
@@ -16,6 +19,19 @@ class UserBasicInfo {
     return client.userBasicInfo.findMany();
   }
 
+  userBasicInfoToSeeProfile(userCode) {
+    logManager(LEVEL.INFO, ERROR_CODE.NONE, userCode);
+    return client.userBasicInfo.findUnique({
+      where: {
+        userCode,
+      },
+      include: {
+        following: true,
+        followers: true,
+      },
+    });
+  }
+
   userBasicInfoToSeeFollowers(userCode, page) {
     return client.userBasicInfo.findUnique({ where: { userCode } }).followers({
       take: 5,
@@ -23,19 +39,65 @@ class UserBasicInfo {
     });
   }
 
-  userBasicInfoToSeeFollowing(userCode, lastUserCode){
-    return client.userBasicInfo
-        .findUnique({ where: { userCode } })
-        .following({
-          take: 5,
-          skip: lastUserCode ? 1 : 0,
-          ...(lastUserCode && { cursor: { userCode: lastUserCode } }),
-        });
+  userBasicInfoToSeeFollowing(userCode, lastUserCode) {
+    return client.userBasicInfo.findUnique({ where: { userCode } }).following({
+      take: 5,
+      skip: lastUserCode ? 1 : 0,
+      ...(lastUserCode && { cursor: { userCode: lastUserCode } }),
+    });
   }
 
   userBasicInfoToFollowTotalCount(userCode) {
     return client.userBasicInfo.count({
       where: { following: { some: { userCode } } },
+    });
+  }
+
+  userBasicInfoToTotalFollowing(userCode) {
+    return client.userBasicInfo.count({
+      where: {
+        followers: {
+          some: {
+            userCode,
+          },
+        },
+      },
+    });
+  }
+
+  userBaiscInfoToTotalFollowers(userCode) {
+    return client.userBasicInfo.count({
+      where: {
+        following: {
+          some: {
+            userCode,
+          },
+        },
+      },
+    });
+  }
+
+  userBaiscInfoToIsFollowing(userCode, loggedInUser) {
+    const exists = client.userBasicInfo.count({
+      where: {
+        userCode: loggedInUser.userCode,
+        following: {
+          some: {
+            userCode,
+          },
+        },
+      },
+    });
+    return Boolean(exists);
+  }
+
+  userBasicInfoSearchUser(keyword: string) {
+    client.userBasicInfo.findMany({
+      where: {
+        userCode: {
+          startsWith: keyword.toLowerCase(),
+        },
+      },
     });
   }
 
