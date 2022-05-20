@@ -9,6 +9,18 @@ class SellInfo {
   sellInfos() {
     return client.userBasicInfo.findMany();
   }
+
+  hashTagToTotalSellInfo(id){
+    return client.sellInfo.count({
+      where: {
+        hashtags: {
+          some: {
+            id,
+          },
+        },
+      },
+    })
+  }
   //#endregion
 
   // #region UserInfo delete

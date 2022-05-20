@@ -6,10 +6,10 @@ import LEVEL from "../../../utilty/type/level";
 export default {
   SellInfo: {
     userBasicInfo: ({userCode}) => {
-        service.UserBasicInfo.userBasicInfo(userCode);
+        return service.UserBasicInfo.userBasicInfo(userCode);
     },
     hashtags: ({ unique }) => {
-        service.HashTag.hashTagToSellInfo(unique);
+        return service.HashTag.hashTagToSellInfo(unique);
     }
       
   },

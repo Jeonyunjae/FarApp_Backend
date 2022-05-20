@@ -5,6 +5,7 @@ export default gql`
     id: Int!
     hashtag: String!
     sellInfos: [SellInfo]
+    totalSellInfos: Int!
     createdAt: String!
     updatedAt: String!
   }

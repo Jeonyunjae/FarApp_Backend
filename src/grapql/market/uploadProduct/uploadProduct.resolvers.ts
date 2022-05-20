@@ -16,10 +16,12 @@ const resolverFn = async (
     transaction = null;
   if (mainComment) {
     const hashtags = mainComment.match(/#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]+/g);
-    hashtagObj = hashtags.map((hashtag) => ({
-      where: { hashtag },
-      create: { hashtag },
-    }));
+    if(hashtags){
+      hashtagObj = hashtags.map((hashtag) => ({
+        where: { hashtag },
+        create: { hashtag },
+      }));
+    }
   }
   unique = nanoid(); //=> "V1StGXR8_Z5jdHi6B-myT"
   transaction = true;

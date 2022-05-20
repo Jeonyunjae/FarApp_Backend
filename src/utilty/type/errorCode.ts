@@ -40,6 +40,9 @@ enum ERROR_CODE {
 
   //seeFollowing
   SEEFOLLOWING_USER_NOT_FOUND = 1101,
+
+  //seeProduct
+  SEEPRODUCT_DONT_PRODUCT = 1201,
 }
 export default ERROR_CODE;
 

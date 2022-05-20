@@ -6,9 +6,10 @@ import client from "../../client";
 class UserBasicInfo {
   // #region UserInfo Read
   userBasicInfo(userCode) {
-    return client.userBasicInfo.findUnique({
+    const result = client.userBasicInfo.findUnique({
       where: { userCode },
     });
+    return result;
   }
 
   userBasicInfoEmail(email) {
