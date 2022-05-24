@@ -5,7 +5,7 @@ import { protectedResolver } from "../../users/utils/utils";
 
 
 const resolverFn = async (_, { hashtag }, { loggedInUser }) => {
-  const sellinfo = service.HashTag.hashTagToHashtag(hashtag);
+  const sellinfo = await service.HashTag.hashTagToHashtag(hashtag);
   if (!sellinfo) {
     logManager.Error(ERROR_CODE.SEEPRODUCT_DONT_PRODUCT);
   }

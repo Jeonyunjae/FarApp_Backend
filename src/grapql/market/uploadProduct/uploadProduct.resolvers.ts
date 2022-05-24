@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import { logManager } from "../../../utilty/logManager/\blogManager";
 import LEVEL from "../../../utilty/type/level";
 import ERROR_CODE from "../../../utilty/type/errorCode";
+import { processHashtags } from "../../../service/market/utils/sellInfo";
 
 const resolverFn = async (
   _,
@@ -15,13 +16,7 @@ const resolverFn = async (
   let unique,
     transaction = null;
   if (mainComment) {
-    const hashtags = mainComment.match(/#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]+/g);
-    if(hashtags){
-      hashtagObj = hashtags.map((hashtag) => ({
-        where: { hashtag },
-        create: { hashtag },
-      }));
-    }
+    hashtagObj = processHashtags(mainComment);
   }
   unique = nanoid(); //=> "V1StGXR8_Z5jdHi6B-myT"
   transaction = true;

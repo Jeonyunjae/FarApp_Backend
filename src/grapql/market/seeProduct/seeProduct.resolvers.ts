@@ -7,7 +7,7 @@ import { protectedResolver } from "../../users/utils/utils";
 
 
 const resolverFn = async (_, { unique }, { loggedInUser }) => {
-  const sellinfo = await service.SellInfo.sellInfoToSeeProduct(unique)
+  const sellinfo = await service.SellInfo.sellInfo(unique)
   if (!sellinfo) {
     logManager.Error(ERROR_CODE.SEEPRODUCT_DONT_PRODUCT);
   }
