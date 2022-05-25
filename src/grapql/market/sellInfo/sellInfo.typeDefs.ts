@@ -8,6 +8,7 @@ export default gql`
     subComment: String
     userBasicInfo: UserBasicInfo
     hashtags: [Hashtag]
+    likes: Int!
     picture: String
     amount: Int
     transaction: Boolean

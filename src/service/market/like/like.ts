@@ -1,56 +1,76 @@
+import { logManager } from "../../../utilty/logManager/\blogManager";
 import client from "../../client";
 
-
-const like = class like {
-
-  // #region UserInfo Read
-  userBasicInfo(userCode) {
-    return client.userBasicInfo.findUnique({ where: { userCode } });
+class Like {
+  // #region Like Read
+  like(id) {
+    return client.like.findFirst({ where: { id: id } });
   }
 
-  userBasicInfoEmail(email) {
-    return client.userBasicInfo.findUnique({ where: { email } });
+  Count(unique: string) {
+    return client.like.count({ where: { unique: unique } });
   }
 
-  userBasicInfos() {
-    return client.userBasicInfo.findMany();
-  }
-  //#endregion
-
-  // #region UserInfo delete
-  delete(userCode) {
-    client.userBasicInfo.delete({ where: { userCode } });
-  }
-  //#endregion
-
-  // #region UserInfo create
-  create(userCode, phoneNumber, email) {
-    const infoResult = client.userBasicInfo.create({
-      data: {
-        userCode,
-        phoneNumber,
-        email,
+  select_WhereUnique_SelectUserBasicInfo(unique) {
+    return client.like.findMany({
+      where: {
+        unique: unique,
+      },
+      select: {
+        userBasicInfo: true,
       },
     });
-    
-    return infoResult;
+  }
+  select_WhereUserCodeUnique(unique, userCode) {
+    const likeWhere = {
+      unique_userdCode: {
+        unique: unique,
+        userdCode: userCode,
+      },
+    };
+    return client.like.findUnique({
+      where: likeWhere,
+    });
+  }
+
+  //#endregion
+
+  // #region Like delete
+  delete_WhereUserCodeUnique(unique, userCode) {
+    const likeWhere = {
+      unique_userdCode: {
+        unique: unique,
+        userdCode: userCode,
+      },
+    };
+    return client.like.delete({
+      where: likeWhere,
+    });
   }
   //#endregion
 
-  // #region UserInfo update
-  updateAll(userCode, phoneNumber, email, avatar) {
-    return client.userBasicInfo.update({ where: { userCode }, data: { phoneNumber, email, avatar } });
+  // #region Like create
+  create(userCode, unique) {
+    return client.like.create({
+      data: {
+        userBasicInfo: {
+          connect: {
+            userCode: userCode,
+          },
+        },
+        sellInfo: {
+          connect: {
+            unique: unique,
+          },
+        },
+      },
+    });
   }
-  updatePhoneNumber(userCode, phoneNumber) {
-    return client.userBasicInfo.update({ where: { userCode }, data: { phoneNumber } });
-  }
-  updateEmail(userCode, email) {
-    return client.userBasicInfo.update({ where: { userCode }, data: { email } });
-  }
-  updateAvatar(userCode, avatar) {
-    return client.userBasicInfo.update({ where: { userCode }, data: { avatar } });
-  }
-}
-//#endregion
+  //#endregion
 
-export default like;
+  // #region Like update
+
+  //#endregion
+}
+
+export default Like;

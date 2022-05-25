@@ -6,11 +6,25 @@ import LEVEL from "../../../utilty/type/level";
 export default {
   SellInfo: {
     userBasicInfo: ({userCode}) => {
-        return service.UserBasicInfo.userBasicInfo(userCode);
+      const userbasicinfo = service.UserBasicInfo.userBasicInfo(userCode);
+      if (!userbasicinfo) {
+        logManager.Error(ERROR_CODE.SELLINFO_DONT_USERBASICINFO);
+      }
+      return userbasicinfo;
     },
     hashtags: ({ unique }) => {
-        return service.HashTag.hashTagToSellInfo(unique);
-    }
-      
+      const hashtags = service.HashTag.hashTagToSellInfo(unique);
+      if (!hashtags) {
+        logManager.Error(ERROR_CODE.SELLINFO_DONT_HASHTAGS);
+      }
+      return hashtags;
+    },
+    likes: ({ unique }) => {
+      const likes = service.Like.Count(unique);
+      if (!likes) {
+        logManager.Error(ERROR_CODE.SELLINFO_DONT_LIKE);
+      }
+      return likes;
+    },
   },
 };
