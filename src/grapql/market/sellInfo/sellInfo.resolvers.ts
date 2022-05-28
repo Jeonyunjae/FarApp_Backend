@@ -20,11 +20,17 @@ export default {
       return hashtags;
     },
     likes: ({ unique }) => {
-      const likes = service.Like.Count(unique);
+      const likes = service.Like.count_WhereUnique(unique);
       if (!likes) {
         logManager.Error(ERROR_CODE.SELLINFO_DONT_LIKE);
       }
       return likes;
+    },
+    isMine: ({ userCode }, _, { loggedInUser }) => {
+      if (!loggedInUser) {
+        return false;
+      }
+      return userCode === loggedInUser.userCode;
     },
   },
 };

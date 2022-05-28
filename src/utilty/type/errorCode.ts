@@ -54,6 +54,13 @@ enum ERROR_CODE {
 
   //toggleLike
   TOGGLELIKE_DONT_PRODUCT = 1501,
+
+  //seeFeed
+  SEEFEED_DONT_PRODUCT = 1601,
+
+  //deleteProduct
+  DELETEPRODUCT_PRODUCT_NOT_FOUND = 1701,
+  DELETEPRODUCT_NOT_AUTHORIZED,
 }
 export default ERROR_CODE;
 

@@ -64,6 +64,7 @@ model UserBasicInfo {
   rooms         Room[]
   Message       Message[]
   likes         Like[]
+  SellInfo      SellInfo[]
   followers     UserBasicInfo[]   @relation("FollowRelation", references: [userCode])
   following     UserBasicInfo[]   @relation("FollowRelation", references: [userCode])
   createdAt     DateTime        @default(now())
@@ -91,6 +92,7 @@ model SellInfo {
   hashtags      Hashtag[]
   transaction   Boolean
   likes         Like[]
+  userBasicInfo UserBasicInfo     @relation(fields: [userCode], references: [userCode])
   categoryCodeDefineInfo CategoryCodeDefineInfo @relation(fields: [categoryCode], references: [categoryCode])
   categoryCode  String
   createdAt DateTime        @default(now())

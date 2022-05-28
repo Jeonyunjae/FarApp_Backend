@@ -1,3 +1,4 @@
+import { logManager } from "../../../utilty/logManager/\blogManager";
 import client from "../../client";
 import { processHashtags } from "../utils/sellInfo";
 
@@ -11,7 +12,7 @@ class SellInfo {
     return client.userBasicInfo.findMany();
   }
 
-  checkUniqueUser(unique, loggedInUser){
+  select_WhereUniqueUserCode(unique, loggedInUser){
     return client.sellInfo.findFirst({
       where: {
         unique,
@@ -25,6 +26,30 @@ class SellInfo {
         },
       },
     });
+  }
+
+  select_WhereUserBasicInfoFollowersUserCode(userCode){
+    return client.sellInfo.findMany({
+      where: {
+        OR: [
+          {
+            userBasicInfo: {
+              followers: {
+                some: {
+                  userCode: userCode,
+                },
+              },
+            },
+          },
+          {
+            userCode: userCode,
+          },
+        ],
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    })
   }
 
   hashTagToTotalSellInfo(id){
@@ -42,7 +67,9 @@ class SellInfo {
 
   // #region UserInfo delete
   delete(unique) {
-    client.sellInfo.delete({ where: { unique } });
+    const value = client.sellInfo.delete({ where: { unique } });
+    logManager.Info(JSON.stringify(value));
+    return value;
   }
   //#endregion
 

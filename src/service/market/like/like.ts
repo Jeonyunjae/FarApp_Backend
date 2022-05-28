@@ -7,7 +7,7 @@ class Like {
     return client.like.findFirst({ where: { id: id } });
   }
 
-  Count(unique: string) {
+  count_WhereUnique(unique: string) {
     return client.like.count({ where: { unique: unique } });
   }
 
@@ -50,7 +50,7 @@ class Like {
   //#endregion
 
   // #region Like create
-  create(userCode, unique) {
+  create(unique, userCode) {
     return client.like.create({
       data: {
         userBasicInfo: {

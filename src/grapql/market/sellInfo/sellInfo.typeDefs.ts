@@ -11,6 +11,7 @@ export default gql`
     likes: Int!
     picture: String
     amount: Int
+    isMine: Boolean
     transaction: Boolean
     categoryCode: String
     createdAt: String

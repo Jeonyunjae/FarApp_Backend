@@ -4,7 +4,7 @@ import ERROR_CODE from "../../../utilty/type/errorCode";
 import { protectedResolver } from "../../users/utils/utils";
 
 const resolverFn = async (_, { unique, mainComment }, { loggedInUser }) => {
-  const oldProduct = await service.SellInfo.checkUniqueUser(
+  const oldProduct = await service.SellInfo.select_WhereUniqueUserCode(
     unique,
     loggedInUser
   );
