@@ -13,7 +13,7 @@ generator client {
 //================Location 관련 테이블================
 model UserLocation{
   userCode      String @id @unique
-  useState      Int
+  userState      Int
   positionAddress PositionAddressInfo?
   postAddress PostAddressInfo?
 }
@@ -26,9 +26,9 @@ model PositionAddressInfo {
 }
 
 model PostAddressInfo {
-  userCode      String 
+  userCode      String @unique
   addressCode   String @id
-  addressCodeInfo    PostAddressCodeDefineInfo?
+  addressCodeInfo    PostAddressCodeDefineInfo @relation(fields: [addressCode], references: [addressCode])
   userLocation      UserLocation   @relation(fields: [userCode], references: [userCode])
 }
 
@@ -42,7 +42,8 @@ model PostAddressCodeDefineInfo {
   address3Code    Int     @unique
   address3Name    String  @unique 
   addressCode     String  @id @unique  
-  address         PostAddressInfo   @relation(fields: [addressCode], references: [addressCode])
+  address         PostAddressInfo[]
+  //address         PostAddressInfo   @relation(fields: [addressCode], references: [addressCode])
 }
 
 //================User 관련 테이블================

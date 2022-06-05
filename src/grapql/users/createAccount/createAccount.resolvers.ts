@@ -1,9 +1,7 @@
 import { ApolloError, UserInputError } from "apollo-server";
 import service from "../../../service/service";
-import LEVEL from "../../../utilty/type/level";
 import { logManager } from "../../../utilty/logManager/logManager";
 import { hashPassword } from "../utils/hash";
-import { getVariableName } from "../../../utilty/filename/filename";
 import { returnValue } from "../../shared/shared";
 import ERROR_CODE from "../../../utilty/type/errorCode";
 
