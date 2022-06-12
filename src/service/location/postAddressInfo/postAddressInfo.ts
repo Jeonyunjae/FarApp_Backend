@@ -8,29 +8,33 @@ class PostAddressInfo {
   }
   //#endregion
 
-
-
   // #region delete
-  
+
   //#endregion
-
-
 
   // #region create
   create(userCode, addressCode) {
     return client.postAddressInfo.create({
       data: {
         userCode,
-        addressCode
+        addressCode,
       },
     });
   }
   //#endregion
 
-
-
   // #region update
-
+  update_whereUserCodeToAddressCode(userCode, addressCode) {
+    logManager.Info("usercode"+userCode);
+    return client.postAddressInfo.update({
+      where: {
+        userCode,
+      },
+      data: {
+        addressCode,
+      },
+    });
+  }
   //#endregion
 }
 

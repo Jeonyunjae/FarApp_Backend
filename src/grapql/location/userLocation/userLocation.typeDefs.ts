@@ -1,11 +1,10 @@
 import { gql } from "apollo-server";
 
 export default gql`
-  type userLocaiton {
+  type userLocation {
     userCode: String
-    useState: Int
+    userState: Int
     positionAddress: PositionAddressInfo
     postAddress: PostAddressInfo
-
   }
 `;

@@ -25,7 +25,16 @@ class UserLocation {
   //#endregion
 
   // #region update
-
+  update_whereUserCodeToState(userCode, userState){
+    return client.userLocation.update({
+      where: {
+        userCode,
+      },
+      data: {
+        userState,
+      }
+    })
+  }
   //#endregion
 }
 

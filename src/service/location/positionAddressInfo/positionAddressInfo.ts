@@ -25,7 +25,17 @@ class PositionAddressInfo {
   //#endregion
 
   // #region update
-
+  update_whereUserCodeToState(userCode, locLatitude, locLongtitude) {
+    return client.positionAddressInfo.update({
+      where: {
+        userCode,
+      },
+      data: {
+        locLatitude,
+        locLongtitude,
+      },
+    });
+  }
   //#endregion
 }
 

@@ -26,8 +26,8 @@ model PositionAddressInfo {
 }
 
 model PostAddressInfo {
-  userCode      String @unique
-  addressCode   String @id
+  userCode      String @id @unique
+  addressCode   String 
   addressCodeInfo    PostAddressCodeDefineInfo @relation(fields: [addressCode], references: [addressCode])
   userLocation      UserLocation   @relation(fields: [userCode], references: [userCode])
 }
