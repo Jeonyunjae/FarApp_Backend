@@ -22,7 +22,7 @@ export default {
       const userState = 0;
       userLocation = await service.UserLocation.create(userCode, userState);
       if (!userLocation) {
-        logManager.Error(ERROR_CODE.CREATEALOCATION_FAIL_INSERT_USERLOCATION);
+        logManager.Error(ERROR_CODE.CREATELOCATION_FAIL_INSERT_USERLOCATION);
       }
       //3. PositionAddressInfo 생성
       userPositionLocation = await service.PositionAddressInfo.create(
@@ -32,7 +32,7 @@ export default {
       );
       if (!userPositionLocation) {
         logManager.Error(
-          ERROR_CODE.CREATEALOCATION_FAIL_INSERT_POSITIONLOCATION
+          ERROR_CODE.CREATELOCATION_FAIL_INSERT_POSITIONLOCATION
         );
       }
 
@@ -45,7 +45,7 @@ export default {
       );
       if (!userPostLocation) {
         logManager.Error(
-          ERROR_CODE.CREATEALOCATION_FAIL_INSERT_POSTLOCATION
+          ERROR_CODE.CREATELOCATION_FAIL_INSERT_POSTLOCATION
         );
       }
       return userLocation;
