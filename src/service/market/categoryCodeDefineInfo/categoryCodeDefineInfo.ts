@@ -4,31 +4,31 @@ import client from "../../client";
 const categoryCodeDefineInfo = class ㅊategoryCodeDefineInfo {
 
   // #region UserInfo Read
-  userBasicInfo(userCode) {
-    return client.userBasicInfo.findUnique({ where: { userCode } });
+  userBasicInfo(usercode) {
+    return client.userbasicinfos.findUnique({ where: { usercode } });
   }
 
   userBasicInfoEmail(email) {
-    return client.userBasicInfo.findUnique({ where: { email } });
+    return client.userbasicinfos.findUnique({ where: { email } });
   }
 
   userBasicInfos() {
-    return client.userBasicInfo.findMany();
+    return client.userbasicinfos.findMany();
   }
   //#endregion
 
   // #region UserInfo delete
-  delete(userCode) {
-    client.userBasicInfo.delete({ where: { userCode } });
+  delete(usercode) {
+    client.userbasicinfos.delete({ where: { usercode } });
   }
   //#endregion
 
   // #region UserInfo create
-  create(userCode, phoneNumber, email) {
-    const infoResult = client.userBasicInfo.create({
+  create(usercode, phonenumber, email) {
+    const infoResult = client.userbasicinfos.create({
       data: {
-        userCode,
-        phoneNumber,
+        usercode,
+        phonenumber,
         email,
       },
     });
@@ -38,17 +38,17 @@ const categoryCodeDefineInfo = class ㅊategoryCodeDefineInfo {
   //#endregion
 
   // #region UserInfo update
-  updateAll(userCode, phoneNumber, email, avatar) {
-    return client.userBasicInfo.update({ where: { userCode }, data: { phoneNumber, email, avatar } });
+  updateAll(usercode, phonenumber, email, avatar) {
+    return client.userbasicinfos.update({ where: { usercode }, data: { phonenumber, email, avatar } });
   }
-  updatePhoneNumber(userCode, phoneNumber) {
-    return client.userBasicInfo.update({ where: { userCode }, data: { phoneNumber } });
+  updatePhoneNumber(usercode, phonenumber) {
+    return client.userbasicinfos.update({ where: { usercode }, data: { phonenumber } });
   }
-  updateEmail(userCode, email) {
-    return client.userBasicInfo.update({ where: { userCode }, data: { email } });
+  updateEmail(usercode, email) {
+    return client.userbasicinfos.update({ where: { usercode }, data: { email } });
   }
-  updateAvatar(userCode, avatar) {
-    return client.userBasicInfo.update({ where: { userCode }, data: { avatar } });
+  updateAvatar(usercode, avatar) {
+    return client.userbasicinfos.update({ where: { usercode }, data: { avatar } });
   }
 }
 //#endregion

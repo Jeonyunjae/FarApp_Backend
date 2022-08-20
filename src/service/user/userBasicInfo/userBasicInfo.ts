@@ -5,25 +5,25 @@ import client from "../../client";
 
 class UserBasicInfo {
   // #region UserInfo Read
-  userBasicInfo(userCode) {
-    const result = client.userBasicInfo.findUnique({
-      where: { userCode },
+  userBasicInfo(usercode) {
+    const result = client.userbasicinfos.findUnique({
+      where: { usercode },
     });
     return result;
   }
 
   userBasicInfoEmail(email) {
-    return client.userBasicInfo.findUnique({ where: { email } });
+    return client.userbasicinfos.findUnique({ where: { email } });
   }
 
   userBasicInfos() {
-    return client.userBasicInfo.findMany();
+    return client.userbasicinfos.findMany();
   }
 
-  userBasicInfoToSeeProfile(userCode) {
-    return client.userBasicInfo.findUnique({
+  userBasicInfoToSeeProfile(usercode) {
+    return client.userbasicinfos.findUnique({
       where: {
-        userCode,
+        usercode,
       },
       include: {
         following: true,
@@ -32,58 +32,58 @@ class UserBasicInfo {
     });
   }
 
-  userBasicInfoToSeeFollowers(userCode, page) {
-    return client.userBasicInfo.findUnique({ where: { userCode } }).followers({
+  userBasicInfoToSeeFollowers(usercode, page) {
+    return client.userbasicinfos.findUnique({ where: { usercode } }).followers({
       take: 5,
       skip: (page - 1) * 5,
     });
   }
 
-  userBasicInfoToSeeFollowing(userCode, lastUserCode) {
-    return client.userBasicInfo.findUnique({ where: { userCode } }).following({
+  userBasicInfoToSeeFollowing(usercode, lastUserCode) {
+    return client.userbasicinfos.findUnique({ where: { usercode } }).following({
       take: 5,
       skip: lastUserCode ? 1 : 0,
-      ...(lastUserCode && { cursor: { userCode: lastUserCode } }),
+      ...(lastUserCode && { cursor: { usercode: lastUserCode } }),
     });
   }
 
-  userBasicInfoToFollowTotalCount(userCode) {
-    return client.userBasicInfo.count({
-      where: { following: { some: { userCode } } },
+  userBasicInfoToFollowTotalCount(usercode) {
+    return client.userbasicinfos.count({
+      where: { following: { some: { usercode } } },
     });
   }
 
-  userBasicInfoToTotalFollowing(userCode) {
-    return client.userBasicInfo.count({
+  userBasicInfoToTotalFollowing(usercode) {
+    return client.userbasicinfos.count({
       where: {
         followers: {
           some: {
-            userCode,
+            usercode,
           },
         },
       },
     });
   }
 
-  userBaiscInfoToTotalFollowers(userCode) {
-    return client.userBasicInfo.count({
+  userBaiscInfoToTotalFollowers(usercode) {
+    return client.userbasicinfos.count({
       where: {
         following: {
           some: {
-            userCode,
+            usercode,
           },
         },
       },
     });
   }
 
-  userBaiscInfoToIsFollowing(userCode, loggedInUser) {
-    const exists = client.userBasicInfo.count({
+  userBaiscInfoToIsFollowing(usercode, loggedInUser) {
+    const exists = client.userbasicinfos.count({
       where: {
-        userCode: loggedInUser.userCode,
+        usercode: loggedInUser.userCode,
         following: {
           some: {
-            userCode,
+            usercode,
           },
         },
       },
@@ -92,9 +92,9 @@ class UserBasicInfo {
   }
 
   userBasicInfoSearchUser(keyword: string) {
-    client.userBasicInfo.findMany({
+    client.userbasicinfos.findMany({
       where: {
-        userCode: {
+        usercode: {
           startsWith: keyword.toLowerCase(),
         },
       },
@@ -104,17 +104,17 @@ class UserBasicInfo {
   //#endregion
 
   // #region UserInfo delete
-  delete(userCode) {
-    client.userBasicInfo.delete({ where: { userCode } });
+  delete(usercode) {
+    client.userbasicinfos.delete({ where: { usercode } });
   }
   //#endregion
 
   // #region UserInfo create
-  create(userCode, phoneNumber, email) {
-    const infoResult = client.userBasicInfo.create({
+  create(usercode, phonenumber, email) {
+    const infoResult = client.userbasicinfos.create({
       data: {
-        userCode,
-        phoneNumber,
+        usercode,
+        phonenumber,
         email,
       },
     });
@@ -124,53 +124,53 @@ class UserBasicInfo {
   //#endregion
 
   // #region UserInfo update
-  updateAll(userCode, phoneNumber, email, avatar) {
-    return client.userBasicInfo.update({
-      where: { userCode },
-      data: { phoneNumber, email, avatar },
+  updateAll(usercode, phonenumber, email, avatar) {
+    return client.userbasicinfos.update({
+      where: { usercode },
+      data: { phonenumber, email, avatar },
     });
   }
-  updatePhoneNumber(userCode, phoneNumber) {
-    return client.userBasicInfo.update({
-      where: { userCode },
-      data: { phoneNumber },
+  updatePhoneNumber(usercode, phonenumber) {
+    return client.userbasicinfos.update({
+      where: { usercode },
+      data: { phonenumber },
     });
   }
-  updateEmail(userCode, email) {
-    return client.userBasicInfo.update({
-      where: { userCode },
+  updateEmail(usercode, email) {
+    return client.userbasicinfos.update({
+      where: { usercode },
       data: { email },
     });
   }
-  updateAvatar(userCode, avatar) {
-    return client.userBasicInfo.update({
-      where: { userCode },
+  updateAvatar(usercode, avatar) {
+    return client.userbasicinfos.update({
+      where: { usercode },
       data: { avatar },
     });
   }
-  updateFollow(userCode: string, loggedInUser: any) {
-    return client.userBasicInfo.update({
+  updateFollow(usercode: string, loggedInUser: any) {
+    return client.userbasicinfos.update({
       where: {
-        userCode: loggedInUser.userCode,
+        usercode: loggedInUser.userCode,
       },
       data: {
         following: {
           connect: {
-            userCode,
+            usercode,
           },
         },
       },
     });
   }
-  updateUnFollow(userCode: string, loggedInUser: any) {
-    return client.userBasicInfo.update({
+  updateUnFollow(usercode: string, loggedInUser: any) {
+    return client.userbasicinfos.update({
       where: {
-        userCode: loggedInUser.userCode,
+        usercode: loggedInUser.userCode,
       },
       data: {
         following: {
           disconnect: {
-            userCode,
+            usercode,
           },
         },
       },

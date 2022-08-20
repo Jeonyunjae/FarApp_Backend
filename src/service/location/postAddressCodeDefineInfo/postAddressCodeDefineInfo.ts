@@ -3,8 +3,8 @@ import client from "../../client";
 
 class PostAddressCodeDefineInfo {
   // #region Read
-  postAddressCodeDefineInfo(addressCode: string) {
-    return client.postAddressCodeDefineInfo.findFirst({ where: { addressCode } });
+  postAddressCodeDefineInfo(addresscode: string) {
+    return client.postaddresscodedefineinfo.findFirst({ where: { addresscode } });
   }
   //#endregion
 

@@ -22,7 +22,7 @@ const resolvers: Resolvers = {
       }
 
       const token = await jwt.sign(
-        { id: userInfo.userCode },
+        { id: userInfo.usercode },
         process.env.SECRET_KEY
       );
       return {

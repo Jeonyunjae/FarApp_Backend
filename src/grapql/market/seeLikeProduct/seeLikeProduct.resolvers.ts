@@ -11,7 +11,7 @@ const resolverFn = async (_, { unique }, { loggedInUser }) => {
   if (!likes) {
     logManager.Error(ERROR_CODE.SEEPRODUCT_DONT_PRODUCT);
   }
-  return likes.map((like) => like.userBasicInfo);
+  return likes.map((like) => like.userbasicinfo);
 };
 
 

@@ -14,7 +14,7 @@ export default {
       if (!userBaiscInfo) {
         logManager.Error(ERROR_CODE.FINDUSERCODE_USER_NOT_FOUND);
       }
-      return returnValue(true, userBaiscInfo.userCode);
+      return returnValue(true, userBaiscInfo.usercode);
     },
   },
 };

@@ -10,7 +10,7 @@ export default {
         logManager.Error(ERROR_CODE.SEEPRODUCTLIKE_DONT_PRODUCT);
       }
 
-      return likes.map((like) => like.userBasicInfo);;
+      return likes.map((like) => like.userbasicinfo);;
     },
   },
 };

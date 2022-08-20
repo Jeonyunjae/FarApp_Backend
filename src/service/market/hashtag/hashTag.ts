@@ -21,7 +21,7 @@ class HashTag {
   hashTagToSellInfo(unique) {
     const result = client.hashtag.findMany({
       where: {
-        sellInfos: {
+        sellinfos: {
           some: {
             unique,
           },
@@ -37,7 +37,7 @@ class HashTag {
       where: {
         id,
       },
-    }).sellInfos();
+    }).sellinfos();
 
     return value;
   }

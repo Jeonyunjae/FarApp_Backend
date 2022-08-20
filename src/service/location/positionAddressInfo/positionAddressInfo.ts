@@ -3,8 +3,8 @@ import client from "../../client";
 
 class PositionAddressInfo {
   // #region Read
-  positionAddressInfo(userCode: string) {
-    return client.positionAddressInfo.findFirst({ where: { userCode } });
+  positionAddressInfo(usercode: string) {
+    return client.positionaddressinfos.findFirst({ where: { usercode } });
   }
   //#endregion
 
@@ -13,26 +13,26 @@ class PositionAddressInfo {
   //#endregion
 
   // #region create
-  create(userCode, locLatitude, locLongtitude) {
-    return client.positionAddressInfo.create({
+  create(usercode, loclatitude, loclongtitude) {
+    return client.positionaddressinfos.create({
       data: {
-        userCode,
-        locLatitude,
-        locLongtitude,
+        usercode,
+        loclatitude,
+        loclongtitude,
       },
     });
   }
   //#endregion
 
   // #region update
-  update_whereUserCodeToState(userCode, locLatitude, locLongtitude) {
-    return client.positionAddressInfo.update({
+  update_whereUserCodeToState(usercode, loclatitude, loclongtitude) {
+    return client.positionaddressinfos.update({
       where: {
-        userCode,
+        usercode,
       },
       data: {
-        locLatitude,
-        locLongtitude,
+        loclatitude,
+        loclongtitude,
       },
     });
   }

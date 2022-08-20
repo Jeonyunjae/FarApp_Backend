@@ -27,7 +27,7 @@ const resolverFn = async (
   );
 
   if (
-    phoneNumber !== updateUserBasicInfo.phoneNumber ||
+    phoneNumber !== updateUserBasicInfo.phonenumber ||
     email !== updateUserBasicInfo.email
   ) {
     logManager.Error(ERROR_CODE.FINDUSERCODE_FAIL_USERBASICINFO_UPDATE);

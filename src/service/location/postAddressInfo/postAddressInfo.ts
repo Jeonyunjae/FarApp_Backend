@@ -3,8 +3,8 @@ import client from "../../client";
 
 class PostAddressInfo {
   // #region Read
-  postAddressInfo(userCode: string) {
-    return client.postAddressInfo.findFirst({ where: { userCode } });
+  postAddressInfo(usercode: string) {
+    return client.postaddressinfo.findFirst({ where: { usercode } });
   }
   //#endregion
 
@@ -13,25 +13,25 @@ class PostAddressInfo {
   //#endregion
 
   // #region create
-  create(userCode, addressCode) {
-    return client.postAddressInfo.create({
+  create(usercode, addresscode) {
+    return client.postaddressinfo.create({
       data: {
-        userCode,
-        addressCode,
+        usercode,
+        addresscode,
       },
     });
   }
   //#endregion
 
   // #region update
-  update_whereUserCodeToAddressCode(userCode, addressCode) {
-    logManager.Info("usercode"+userCode);
-    return client.postAddressInfo.update({
+  update_whereUserCodeToAddressCode(usercode, addresscode) {
+    logManager.Info("usercode"+usercode);
+    return client.postaddressinfo.update({
       where: {
-        userCode,
+        usercode,
       },
       data: {
-        addressCode,
+        addresscode,
       },
     });
   }

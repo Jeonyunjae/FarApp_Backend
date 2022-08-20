@@ -10,7 +10,7 @@ const resolverFn = async (_, { unique }, { loggedInUser }) => {
   );
   if (!sellinfo) {
     logManager.Error(ERROR_CODE.DELETEPRODUCT_PRODUCT_NOT_FOUND);
-  } else if (sellinfo.userCode !== loggedInUser.userCode) {
+  } else if (sellinfo.usercode !== loggedInUser.userCode) {
     logManager.Error(ERROR_CODE.DELETEPRODUCT_NOT_AUTHORIZED);
   } else {
     await service.SellInfo.delete(unique);

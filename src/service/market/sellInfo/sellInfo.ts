@@ -5,18 +5,18 @@ import { processHashtags } from "../utils/sellInfo";
 class SellInfo {
   // #region UserInfo Read
   sellInfo(unique) {
-    return client.sellInfo.findUnique({ where: { unique } });
+    return client.sellinfo.findUnique({ where: { unique } });
   }
 
   sellInfos() {
-    return client.userBasicInfo.findMany();
+    return client.sellinfo.findMany();
   }
 
   select_WhereUniqueUserCode(unique, loggedInUser){
-    return client.sellInfo.findFirst({
+    return client.sellinfo.findFirst({
       where: {
         unique,
-        userCode: loggedInUser.userCode,
+        usercode: loggedInUser.userCode,
       },
       include: {
         hashtags: {
@@ -28,32 +28,32 @@ class SellInfo {
     });
   }
 
-  select_WhereUserBasicInfoFollowersUserCode(userCode){
-    return client.sellInfo.findMany({
+  select_WhereUserBasicInfoFollowersUserCode(usercode){
+    return client.sellinfo.findMany({
       where: {
         OR: [
           {
-            userBasicInfo: {
+            userbasicinfo: {
               followers: {
                 some: {
-                  userCode: userCode,
+                  usercode: usercode,
                 },
               },
             },
           },
           {
-            userCode: userCode,
+            usercode: usercode,
           },
         ],
       },
       orderBy: {
-        createdAt: "desc",
+        createdat: "desc",
       },
     })
   }
 
   hashTagToTotalSellInfo(id){
-    return client.sellInfo.count({
+    return client.sellinfo.count({
       where: {
         hashtags: {
           some: {
@@ -67,7 +67,7 @@ class SellInfo {
 
   // #region UserInfo delete
   delete(unique) {
-    const value = client.sellInfo.delete({ where: { unique } });
+    const value = client.sellinfo.delete({ where: { unique } });
     logManager.Info(JSON.stringify(value));
     return value;
   }
@@ -76,21 +76,21 @@ class SellInfo {
   // #region UserInfo create
   create(
     unique,
-    userCode,
-    mainComment,
-    subComment,
+    usercode,
+    maincomment,
+    subcomment,
     picture,
     amount,
     transaction,
     hashtagObj,
-    categoryCode
+    categorycode
   ) {
-    return client.sellInfo.create({
+    return client.sellinfo.create({
       data: {
         unique,
-        userCode,
-        mainComment,
-        subComment,
+        usercode,
+        maincomment,
+        subcomment,
         picture,
         amount,
         transaction,
@@ -99,7 +99,7 @@ class SellInfo {
             connectOrCreate: hashtagObj,
           },
         }),
-        categoryCode,
+        categorycode,
       },
     });
   }
@@ -108,21 +108,21 @@ class SellInfo {
   // #region UserInfo update
   updateAll(
     unique,
-    userCode,
-    mainComment,
-    subComment,
+    usercode,
+    maincomment,
+    subcomment,
     picture,
     amount,
     transaction,
     hashtagObj,
-    categoryCode
+    categorycode
   ) {
-    return client.sellInfo.update({
+    return client.sellinfo.update({
       where: { unique },
       data: {
-        userCode,
-        mainComment,
-        subComment,
+        usercode,
+        maincomment,
+        subcomment,
         picture,
         amount,
         transaction,
@@ -131,21 +131,21 @@ class SellInfo {
             connectOrCreate: hashtagObj,
           },
         }),
-        categoryCode,
+        categorycode,
       },
     });
   }
 
-  updateToEditProduct(unique, mainComment, oldProduct){
-    return client.sellInfo.update({
+  updateToEditProduct(unique, maincomment, oldproduct){
+    return client.sellinfo.update({
       where: {
         unique,
       },
       data: {
-        mainComment,
+        maincomment,
         hashtags: {
-          disconnect: oldProduct.hashtags,
-          connectOrCreate: processHashtags(mainComment),
+          disconnect: oldproduct.hashtags,
+          connectOrCreate: processHashtags(maincomment),
         },
       },
     });

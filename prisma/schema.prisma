@@ -11,65 +11,65 @@ generator client {
 }
 
 //================Location 관련 테이블================
-model UserLocation{
-  userCode      String @id @unique
-  userState      Int
-  positionAddress PositionAddressInfo?
-  postAddress PostAddressInfo?
+model userlocation{
+  usercode      String @id @unique
+  userstate      Int
+  positionaddress positionaddressinfos?
+  postaddress postaddressinfo?
 }
 
-model PositionAddressInfo {
-  userCode      String @id @unique
-  locLatitude   Int 
-  locLongtitude Int
-  userLocation      UserLocation   @relation(fields: [userCode], references: [userCode])
+model positionaddressinfos {
+  usercode      String @id @unique
+  loclatitude   Int 
+  loclongtitude Int
+  userlocation      userlocation   @relation(fields: [usercode], references: [usercode])
 }
 
-model PostAddressInfo {
-  userCode      String @id @unique
-  addressCode   String 
-  addressCodeInfo    PostAddressCodeDefineInfo @relation(fields: [addressCode], references: [addressCode])
-  userLocation      UserLocation   @relation(fields: [userCode], references: [userCode])
+model postaddressinfo {
+  usercode      String @id @unique
+  addresscode   String 
+  addresscodeinfo    postaddresscodedefineinfo @relation(fields: [addresscode], references: [addresscode])
+  userlocation      userlocation   @relation(fields: [usercode], references: [usercode])
 }
 
-model PostAddressCodeDefineInfo {
-  countryCode     Int     @unique
-  countryName     String  @unique
-  address1Code    Int     @unique
-  address1Name    String  @unique
-  address2Code    Int     @unique
-  address2Name    String  @unique
-  address3Code    Int     @unique
-  address3Name    String  @unique 
-  addressCode     String  @id @unique  
-  address         PostAddressInfo[]
+model postaddresscodedefineinfo {
+  countrycode     Int     @unique
+  countryname     String  @unique
+  address1code    Int     @unique
+  address1name    String  @unique
+  address2code    Int     @unique
+  address2name    String  @unique
+  address3code    Int     @unique
+  address3name    String  @unique 
+  addresscode     String  @id @unique  
+  address         postaddressinfo[]
   //address         PostAddressInfo   @relation(fields: [addressCode], references: [addressCode])
 }
 
 //================User 관련 테이블================
-model UserInfo {
-  userCode      String    @id @unique
+model userinfo {
+  usercode      String    @id @unique
   password      String
-  userBasicInfo UserBasicInfo? 
+  userbasicinfos userbasicinfos? 
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
 }
 
-model UserBasicInfo {
-  userCode      String    @id @unique
+model userbasicinfos {
+  usercode      String    @id @unique
   avatar        String?
-  phoneNumber   String
+  phonenumber   String
   email         String    @unique
-  checkPhone    Boolean   @default(false)
-  userinfo      UserInfo   @relation(fields: [userCode], references: [userCode])
-  rooms         Room[]
-  Message       Message[]
-  likes         Like[]
-  SellInfo      SellInfo[]
-  followers     UserBasicInfo[]   @relation("FollowRelation", references: [userCode])
-  following     UserBasicInfo[]   @relation("FollowRelation", references: [userCode])
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  checkphone    Boolean   @default(false)
+  userinfo      userinfo   @relation(fields: [usercode], references: [usercode])
+  rooms         room[]
+  message       message[]
+  likes         like[]
+  sellinfo      sellinfo[]
+  followers     userbasicinfos[]   @relation("FollowRelation", references: [usercode])
+  following     userbasicinfos[]   @relation("FollowRelation", references: [usercode])
+  createdat     DateTime        @default(now())
+  updatedat     DateTime        @updatedAt
 }
 
 //================Product 관련 테이블================
@@ -83,75 +83,75 @@ model UserBasicInfo {
 //  updatedAt     DateTime  @updatedAt
 //}
 
-model SellInfo {
+model sellinfo {
   unique        String    @id @unique
-  userCode      String
-  mainComment   String
-  subComment    String
+  usercode      String
+  maincomment   String
+  subcomment    String
   picture       String
   amount        Int
-  hashtags      Hashtag[]
+  hashtags      hashtag[]
   transaction   Boolean
-  likes         Like[]
-  userBasicInfo UserBasicInfo     @relation(fields: [userCode], references: [userCode])
-  categoryCodeDefineInfo CategoryCodeDefineInfo @relation(fields: [categoryCode], references: [categoryCode])
-  categoryCode  String
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
+  likes         like[]
+  userbasicinfo userbasicinfos     @relation(fields: [usercode], references: [usercode])
+  categorycodedefineinfo categorycodedefineinfo @relation(fields: [categorycode], references: [categorycode])
+  categorycode  String
+  createdat DateTime        @default(now())
+  updatedat DateTime        @updatedAt
 }
 
-model Like {
+model like {
   id            Int               @id @default(autoincrement())
-  sellInfo      SellInfo          @relation(fields: [unique], references: [unique])
-  userBasicInfo UserBasicInfo     @relation(fields: [userdCode], references: [userCode])
+  sellinfo      sellinfo          @relation(fields: [unique], references: [unique])
+  userbasicinfo userbasicinfos     @relation(fields: [usercode], references: [usercode])
   unique        String
-  userdCode     String
-  createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt
+  usercode     String
+  createdat     DateTime          @default(now())
+  updatedat     DateTime          @updatedAt
 
-  @@unique([unique, userdCode])
+  @@unique([unique, usercode])
 }
 
 
-model Hashtag {
+model hashtag {
   id        Int      @id @default(autoincrement())
   hashtag   String   @unique
-  sellInfos  SellInfo[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  sellinfos  sellinfo[]
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
 }
 
-model CategoryCodeDefineInfo {
-  category1Code    Int     
-  category1Name    String  
-  category2Code    Int     
-  category2Name    String  
-  category3Code    Int     
-  category3Name    String  
-  category4Code    Int     
-  category4Name    String  
-  categoryCode     String     @id @unique
-  sellInfo         SellInfo[]
+model categorycodedefineinfo {
+  category1code    Int     
+  category1name    String  
+  category2code    Int     
+  category2name    String  
+  category3code    Int     
+  category3name    String  
+  category4code    Int     
+  category4name    String  
+  categorycode     String     @id @unique
+  sellinfo         sellinfo[]
 }
 
 //================Message 관련 테이블================
 
-model Room {
+model room {
   id        Int             @id @default(autoincrement())
-  users     UserBasicInfo[]
-  messages  Message[]
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
+  users     userbasicinfos[]
+  messages  message[]
+  createdat DateTime        @default(now())
+  updatedat DateTime        @updatedAt
 }
 
-model Message {
+model message {
   id        Int             @id @default(autoincrement())
   payload   String
-  userCode  String
-  user      UserBasicInfo   @relation(fields: [userCode], references: [userCode])
-  room      Room            @relation(fields: [roomId], references: [id])
-  roomId    Int
+  usercode  String
+  user      userbasicinfos   @relation(fields: [usercode], references: [usercode])
+  room      room            @relation(fields: [roomid], references: [id])
+  roomid    Int
   read      Boolean         @default(false)
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
+  createdat DateTime        @default(now())
+  updatedat DateTime        @updatedAt
 }

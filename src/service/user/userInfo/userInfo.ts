@@ -3,31 +3,31 @@ import client from "../../client";
 
 class UserInfo {
 
-  userInfo(userCode:string) {
-    return client.userInfo.findFirst({ where: { userCode } });
+  userInfo(usercode:string) {
+    return client.userinfo.findFirst({ where: { usercode } });
   }
 
   userInfos() {
-    return client.userInfo.findMany();
+    return client.userinfo.findMany();
   }
 
   
 
-  delete(userCode:string) {
-    client.userInfo.delete({ where: { userCode } });
+  delete(usercode:string) {
+    client.userinfo.delete({ where: { usercode } });
   }
 
-  create(userCode:string, password:string) {
-    return client.userInfo.create({
+  create(usercode:string, password:string) {
+    return client.userinfo.create({
       data: {
-        userCode,
+        usercode,
         password,
       },
     });
   }
 
-  updatePassword(userCode:string, password:string) {
-    return client.userInfo.update({ where: { userCode }, data: { password } });
+  updatePassword(usercode:string, password:string) {
+    return client.userinfo.update({ where: { usercode }, data: { password } });
   }
 }
 

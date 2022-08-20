@@ -3,8 +3,8 @@ import client from "../../client";
 
 class UserLocation {
   // #region Read
-  userLocation(userCode: string) {
-    return client.userLocation.findFirst({ where: { userCode } });
+  userLocation(usercode: string) {
+    return client.userlocation.findFirst({ where: { usercode } });
   }
 
   //#endregion
@@ -14,24 +14,24 @@ class UserLocation {
   //#endregion
 
   // #region create
-  create(userCode, userState) {
-    return client.userLocation.create({
+  create(usercode, userstate) {
+    return client.userlocation.create({
       data: {
-        userCode,
-        userState,
+        usercode,
+        userstate,
       },
     });
   }
   //#endregion
 
   // #region update
-  update_whereUserCodeToState(userCode, userState){
-    return client.userLocation.update({
+  update_whereUserCodeToState(usercode, userstate){
+    return client.userlocation.update({
       where: {
-        userCode,
+        usercode,
       },
       data: {
-        userState,
+        userstate,
       }
     })
   }

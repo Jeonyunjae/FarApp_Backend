@@ -17,15 +17,15 @@ class Like {
         unique: unique,
       },
       select: {
-        userBasicInfo: true,
+        userbasicinfo: true,
       },
     });
   }
-  select_WhereUserCodeUnique(unique, userCode) {
+  select_WhereUserCodeUnique(unique, usercode) {
     const likeWhere = {
-      unique_userdCode: {
+      unique_usercode: {
         unique: unique,
-        userdCode: userCode,
+        usercode: usercode,
       },
     };
     return client.like.findUnique({
@@ -36,11 +36,11 @@ class Like {
   //#endregion
 
   // #region Like delete
-  delete_WhereUserCodeUnique(unique, userCode) {
+  delete_WhereUserCodeUnique(unique, usercode) {
     const likeWhere = {
-      unique_userdCode: {
+      unique_usercode: {
         unique: unique,
-        userdCode: userCode,
+        usercode: usercode,
       },
     };
     return client.like.delete({
@@ -50,15 +50,15 @@ class Like {
   //#endregion
 
   // #region Like create
-  create(unique, userCode) {
+  create(unique, usercode) {
     return client.like.create({
       data: {
-        userBasicInfo: {
+        userbasicinfo: { 
           connect: {
-            userCode: userCode,
+            usercode: usercode,
           },
         },
-        sellInfo: {
+        sellinfo: {
           connect: {
             unique: unique,
           },
